@@ -21,8 +21,15 @@ public class NonDirectionalAdjacencyMatrix{
     }
 
     public void addEdge(int node1, int node2){
+        node1--;
+        node2--;
         if(node1 > this.nodeAmount || node2 > this.nodeAmount){
             System.out.println("ERRO: nó recebido não existe \n");
+            return;
+        }
+
+        if(node1 == node2){
+            this.matrix.get(node1).set(node2, this.matrix.get(node1).get(node2) + 1);
             return;
         }
 
@@ -37,7 +44,7 @@ public class NonDirectionalAdjacencyMatrix{
         for(int i = 0; i < this.nodeAmount; i++){
             if(this.matrix.get(i).get(i) > 0){
                 output += "Loop detectado no vértice " + (i + 1) + "\n \n";
-                isTrue = false;
+                isTrue = true;
             }
         }
 
@@ -57,21 +64,22 @@ public class NonDirectionalAdjacencyMatrix{
                 continue;
             }
 
-            int node1 = i, node2 = 0;
-            for(int j = 0; j < i; j++){
+            int node1 = i + 1, node2 = 0;
+            for(int j = 0; j < this.nodeAmount; j++){
                 if(this.matrix.get(i).get(j) > 1){
-                    node2 = j;
+                    node2 = j + 1;
                     break;
                 }
             }
             output += "(" + node1 + ", " + node2 + "), ";
+            isTrue = true;
         }
 
         if(!isTrue){
             return "Nenhuma aresta paralela detectada \n \n";
         }
 
-        output = output.substring(0, output.length() - 3) + "] \n \n";
+        output = output.substring(0, output.length() - 2) + "] \n \n";
         return output;
     }
 
@@ -81,7 +89,7 @@ public class NonDirectionalAdjacencyMatrix{
             degreeValue += node;
         }
 
-        return "O grau do vértice " + (nodeIndex + 1) + "é " + degreeValue + "\n";
+        return "O grau do vértice " + (nodeIndex + 1) + " é " + degreeValue + "\n";
     }
 
     public String allNodesDegree(){
@@ -94,19 +102,20 @@ public class NonDirectionalAdjacencyMatrix{
         return output;
     }
 
+    @Override
     public String toString(){
-        String output = "Matriz de Adjacência não Direcionada: \n \n  ";
+        String output = "Matriz de Adjacência não Direcionada: \n \n    ";
 
         //vértices
         for(int i = 0; i < this.nodeAmount; i++){
-            output += (i < 9) ? "  " + (i + 1) : " " + (i + 1);
+            output += ((i < 9) ? "  " + (i + 1)  : " " + (i + 1)) + " |";
         }
         output += "\n";
 
         for(int i = 0; i < this.nodeAmount; i++){
-            output += output += (i < 9) ? " " + (i + 1) : (i + 1);
+            output += ((i < 9) ? " " + (i + 1) : (i + 1)) + " |";
             for(int j = 0; j < nodeAmount; j++){
-                output += (i < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j);
+                output += ((i < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j)) + " |";
             }
             output += "\n";
         }

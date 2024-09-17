@@ -22,12 +22,14 @@ public class Main{
         DirectionalAdjacencyList dAdjList = null;
 
         while(!input.equals("L")){
+            menu();
+            input = scan.nextLine();
             switch(input){
                 case "Q":
                 {
                     int newQnt;
                     while(true){
-                        System.out.println("Digite a quandidade de vértices: ");
+                        System.out.println("Digite a quantidade de vértices: ");
                         try{
                             newQnt = Integer.parseInt(scan.nextLine());
                             if(newQnt < 1){
@@ -47,6 +49,7 @@ public class Main{
                 {
                     if(ndIncMatrix == null){
                         System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
                     }
                     int newN1, newN2;
                     while(true){
@@ -64,6 +67,10 @@ public class Main{
                 break;
             
                 case "Z":
+                    if(ndIncMatrix == null){
+                        System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
+                    }
                     System.out.println(ndIncMatrix.toString());
                 break;
 
@@ -71,7 +78,7 @@ public class Main{
                 {
                     int newQnt;
                     while(true){
-                        System.out.println("Digite a quandidade de vértices: ");
+                        System.out.println("Digite a quantidade de vértices: ");
                         try{
                             newQnt = Integer.parseInt(scan.nextLine());
                             if(newQnt < 1){
@@ -91,6 +98,7 @@ public class Main{
                 {
                     if(dIncMatrix == null){
                         System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
                     }
                     int newN1, newN2;
                     while(true){
@@ -108,6 +116,10 @@ public class Main{
                 break;
             
                 case "X":
+                    if(dIncMatrix == null){
+                        System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
+                    }
                     System.out.println(dIncMatrix.toString());
                 break;
 
@@ -115,7 +127,7 @@ public class Main{
                 {
                     int newQnt;
                     while(true){
-                        System.out.println("Digite a quandidade de vértices: ");
+                        System.out.println("Digite a quantidade de vértices: ");
                         try{
                             newQnt = Integer.parseInt(scan.nextLine());
                             if(newQnt < 1){
@@ -135,6 +147,7 @@ public class Main{
                 {
                     if(ndAdjMatrix == null){
                         System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
                     }
                     int newN1, newN2;
                     while(true){
@@ -152,6 +165,10 @@ public class Main{
                 break;
             
                 case "C":
+                    if(ndAdjMatrix == null){
+                        System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
+                    }
                     System.out.println(ndAdjMatrix.toString());
                 break;
 
@@ -159,7 +176,7 @@ public class Main{
                 {
                     int newQnt;
                     while(true){
-                        System.out.println("Digite a quandidade de vértices: ");
+                        System.out.println("Digite a quantidade de vértices: ");
                         try{
                             newQnt = Integer.parseInt(scan.nextLine());
                             if(newQnt < 1){
@@ -179,6 +196,7 @@ public class Main{
                 {
                     if(dAdjMatrix == null){
                         System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
                     }
                     int newN1, newN2;
                     while(true){
@@ -196,6 +214,10 @@ public class Main{
                 break;
                 
                 case "V":
+                    if(dAdjMatrix == null){
+                        System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
+                    }
                     System.out.println(dAdjMatrix.toString());
                 break;
 
@@ -203,7 +225,7 @@ public class Main{
                 {
                     int newQnt;
                     while(true){
-                        System.out.println("Digite a quandidade de vértices: ");
+                        System.out.println("Digite a quantidade de vértices: ");
                         try{
                             newQnt = Integer.parseInt(scan.nextLine());
                             if(newQnt < 1){
@@ -223,6 +245,7 @@ public class Main{
                 {
                     if(ndAdjList == null){
                         System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
                     }
                     int newN1, newN2;
                     while(true){
@@ -240,6 +263,10 @@ public class Main{
                 break;
             
                 case "B":
+                    if(ndAdjList == null){
+                        System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
+                    }
                     System.out.println(ndAdjList.toString());
                 break;
 
@@ -267,6 +294,7 @@ public class Main{
                 {
                     if(dAdjList == null){
                         System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
                     }
                     int newN1, newN2;
                     while(true){
@@ -284,6 +312,10 @@ public class Main{
                 break;
             
                 case "N":
+                    if(dAdjList == null){
+                        System.out.println("\n ERRO: Matriz não foi criada ainda. \n");
+                        break;
+                    }
                     System.out.println(dAdjList.toString());
                 break;
             

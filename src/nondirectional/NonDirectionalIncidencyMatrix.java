@@ -15,19 +15,21 @@ public class NonDirectionalIncidencyMatrix{
     }
 
     public void addEdge(int node1, int node2){
+        node1--;
+        node2--;
         if(node1 > this.nodeAmount || node2 > this.nodeAmount){
             System.out.println("ERRO: nó recebido não existe \n");
             return;
         }
         matrix.add(new ArrayList<Integer>());
-        this.edgeAmount++;
-        for(int i = 0; i < this.matrix.size(); i++){
+        for(int i = 0; i < this.nodeAmount; i++){
             if(i != node1 && i != node2){
-                this.matrix.get(i).add(0);
+                this.matrix.get(this.edgeAmount).add(0);
             }else{
-                this.matrix.get(i).add(1);
+                this.matrix.get(this.edgeAmount).add(1);
             }
         }
+        this.edgeAmount++;
     }
 
     public String loopDetection(){
@@ -36,7 +38,7 @@ public class NonDirectionalIncidencyMatrix{
         boolean isTrue = false;
         for(ArrayList<Integer> arrayList : this.matrix){
             if(arrayList.indexOf(1) == arrayList.lastIndexOf(1)){
-                output += "Loop detectado no vértice " + (arrayList.indexOf(2) + 1) + "\n";
+                output += "Loop detectado no vértice " + (arrayList.indexOf(1) + 1) + "\n";
                 isTrue = true;
             }
         }
@@ -50,7 +52,7 @@ public class NonDirectionalIncidencyMatrix{
     }
 
     public String parallelEdgeDetection(){
-        String output = "[";
+        String output = "Arestas paralelas detectadas: [";
 
         boolean isTrue = false;
         for(ArrayList<Integer> arrayList : this.matrix){
@@ -64,7 +66,7 @@ public class NonDirectionalIncidencyMatrix{
             return "Nenhuma aresta paralela detectada \n \n";
         }
         
-        output = output.substring(0, output.length() - 3) + "] \n \n";
+        output = output.substring(0, output.length() - 2) + "] \n \n";
         return output;
 
     }
@@ -78,7 +80,7 @@ public class NonDirectionalIncidencyMatrix{
             degreeValue++;
         }
 
-        return "O grau do vértice " + (nodeIndex + 1) + "é " + degreeValue + "\n";
+        return "O grau do vértice " + (nodeIndex + 1) + " é " + degreeValue + "\n";
     }
 
     public String allNodesDegree(){
@@ -91,19 +93,20 @@ public class NonDirectionalIncidencyMatrix{
         return output;
     }
 
+    @Override
     public String toString(){
-        String output = "Matriz de Incidência não Direcionada: \n \n  ";
-
+        String output = "Matriz de Incidência não Direcionada: \n \n    ";
+        
         //vértices
         for(int i = 0; i < edgeAmount; i++){
-            output += (i < 9) ? "  " + (i + 1) : " " + (i + 1);
+            output += ((i < 9) ? "  " + (i + 1) : " " + (i + 1)) + " |";
         }
         output += "\n";
-
+        
         for(int i = 0; i < nodeAmount; i++){
-            output += output += (i < 9) ? " " + (i + 1) : (i + 1);
+            output += ((i < 9) ? " " + (i + 1) : (i + 1)) + " |";
             for(int j = 0; j < edgeAmount; j++){
-                output += (i < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j);
+                output += ((this.matrix.get(j).get(i) < 9) ? "  " + this.matrix.get(j).get(i): " " + this.matrix.get(j).get(i)) + " |";
             }
             output += "\n";
         }

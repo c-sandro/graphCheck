@@ -21,6 +21,8 @@ public class DirectionalAdjacencyMatrix{
     }
 
     public void addEdge(int node1, int node2){
+        node1--;
+        node2--;
         if(node1 > this.nodeAmount || node2 > this.nodeAmount){
             System.out.println("ERRO: nó recebido não existe \n");
             return;
@@ -36,7 +38,7 @@ public class DirectionalAdjacencyMatrix{
         for(int i = 0; i < this.nodeAmount; i++){
             if(this.matrix.get(i).get(i) > 0 ){
                 output += "Loop detectado no vértice " + (i + 1) + "\n";
-                isTrue = false;
+                isTrue = true;
             }
         }
 
@@ -51,25 +53,30 @@ public class DirectionalAdjacencyMatrix{
         String output = "Arestas paralelas detectadas: [";
 
         boolean isTrue = false;
+        int amount = 0;
         for(int i = 0; i < this.nodeAmount; i++){
             if((Collections.frequency(this.matrix.get(i), 0) + Collections.frequency(this.matrix.get(i), 1)) == this.nodeAmount){
                 continue;
             }
 
-            int node1 = i, node2 = 0;
+            int node1 = i+1, node2 = 0;
             for(int j = 0; j < this.nodeAmount; j++){
                 if(this.matrix.get(i).get(j) > 1){
-                    node2 = j;
+                    node2 = j+1;
+                    amount = this.matrix.get(i).get(j);
                     break;
                 }
             }
-            output += "(" + node1 + ", " + node2 + "), ";
+            isTrue = true;
+            for(int j = 0; j < amount; j++){
+                output += "(" + node1 + ", " + node2 + "), ";
+            }
         }
         if(!isTrue){
             return "Nenhuma aresta paralela detectada \n \n";
         }
 
-        output = output.substring(0, output.length() - 3) + "] \n \n";
+        output = output.substring(0, output.length() - 2) + "] \n \n";
         return output;
     }
 
@@ -79,16 +86,16 @@ public class DirectionalAdjacencyMatrix{
         int indegreeValue = 0;
         int outdegreeValue = 0;
 
-        for(int node : matrix.get(nodeIndex)){
-            indegreeValue += node;
-        }
-
         for(ArrayList<Integer> arrayList : this.matrix){
-            outdegreeValue += arrayList.get(nodeIndex);
+            indegreeValue += arrayList.get(nodeIndex);
         }
 
-        output += "O grau de entrada do vértice " + (nodeIndex + 1) + "é " + indegreeValue + "\n";
-        output += "Grau de saida do nó " + (nodeIndex + 1) + "é " + outdegreeValue + "\n";
+        for(int node : matrix.get(nodeIndex)){
+            outdegreeValue += node;
+        }
+
+        output += "O grau de entrada do vértice " + (nodeIndex + 1) + " é " + indegreeValue + "\n";
+        output += "Grau de saida do nó " + (nodeIndex + 1) + " é " + outdegreeValue + "\n \n";
 
         return output;
     }
@@ -103,19 +110,20 @@ public class DirectionalAdjacencyMatrix{
         return output;
     }
 
+    @Override
     public String toString(){
-        String output = "Matriz de Adjacência Direcionada: \n \n  ";
+        String output = "Matriz de Adjacência Direcionada: \n \n     ";
 
         //vértices
         for(int i = 0; i < nodeAmount; i++){
-            output += (i < 9) ? "  " + (i + 1) : " " + (i + 1);
+            output += ((i < 9) ? "  " + (i + 1) : " " + (i + 1)) + " |";
         }
-        output += "\n";
+        output += "\n ";
 
         for(int i = 0; i < nodeAmount; i++){
-            output += output += (i < 9) ? " " + (i + 1) : (i + 1);
+            output += ((i > -1 && i < 9) ? "  " + (i + 1) : " " + (i + 1)) + " |";
             for(int j = 0; j < nodeAmount; j++){
-                output += (i < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j);
+                output += (this.matrix.get(i).get(j) < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j) + " |";
             }
             output += "\n";
         }

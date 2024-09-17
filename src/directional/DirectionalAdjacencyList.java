@@ -11,6 +11,7 @@ public class DirectionalAdjacencyList{
     public DirectionalAdjacencyList(int nodeAmount){
         this.nodeAmount = nodeAmount;
         this.nodeList = new ArrayList<>();
+        this.edgeList = new ArrayList<>();
 
         for(int i = 0; i < nodeAmount; i++){
             this.nodeList.add(new ArrayList<>());
@@ -19,6 +20,8 @@ public class DirectionalAdjacencyList{
     }
 
     public void addEdge(int node1, int node2){
+        node1--;
+        node2--;
         if(node1 > this.nodeAmount || node2 > this.nodeAmount){
             System.out.println("ERRO: nó recebido não existe \n");
             return;
@@ -35,7 +38,7 @@ public class DirectionalAdjacencyList{
         for(int i = 0; i < this.nodeAmount; i++){
             if(this.nodeList.get(i).indexOf(i) != -1){
                 output += "Loop detectado no vértice " + (i + 1) + "\n";
-                isTrue = false;
+                isTrue = true;
             }
         }
         if(!isTrue){
@@ -58,6 +61,7 @@ public class DirectionalAdjacencyList{
             for(String string : arrayList){
                 if(arrayList.indexOf(string) != arrayList.lastIndexOf(string)){
                     output += string + ", ";
+                    isTrue = true;
                     break;
                 }   
             }
@@ -67,7 +71,7 @@ public class DirectionalAdjacencyList{
             return "Nenhuma aresta paralela detectada \n \n"; 
         }
 
-        output = output.substring(0, output.length() - 3) + "] \n \n";
+        output = output.substring(0, output.length() - 2) + "] \n \n";
         return output;  
     }
 
@@ -88,8 +92,8 @@ public class DirectionalAdjacencyList{
 
         int outdegreeValue = this.nodeList.get(nodeIndex).size();
         
-        output += "O grau de entrada do vértice " + (nodeIndex + 1) + "é " + indegreeValue + "\n";
-        output += "O grau de entrada do vértice " + (nodeIndex + 1) + ": " + outdegreeValue + "\n \n";
+        output += "O grau de entrada do vértice " + (nodeIndex + 1) + " é " + indegreeValue + "\n";
+        output += "O grau de saída do vértice " + (nodeIndex + 1) + " é " + outdegreeValue + "\n \n";
         return output;
     }
 
@@ -103,6 +107,7 @@ public class DirectionalAdjacencyList{
         return output;
     }
 
+    @Override
     public String toString(){
         String outputNodes = "Lista de Adjacência de Vértices: \n";
         String outputEdges = "Lista de Arestas por Vértice: \n";
@@ -111,9 +116,13 @@ public class DirectionalAdjacencyList{
         for(int i = 0; i < nodeAmount; i++){
             outputNodes += "Vértice " + (i + 1) + ": [";
             for (int node : this.nodeList.get(i)){
-                outputNodes += node + ", ";
+                outputNodes += (node + 1) + ", ";
             }
-            outputNodes = outputNodes.substring(0, outputNodes.length() - 3) + "] \n";
+            if(this.nodeList.get(i).size() != 0){
+                outputNodes = outputNodes.substring(0, outputNodes.length() - 2) + "] \n";
+            }else{
+                outputNodes = "[] \n";
+            }
         }
         outputNodes += "\n";
 
@@ -123,7 +132,11 @@ public class DirectionalAdjacencyList{
             for (String edge : this.edgeList.get(i)){
                 outputEdges += edge + ", ";
             }
-            outputEdges = outputEdges.substring(0, outputEdges.length() - 3) + "] \n";
+            if(this.edgeList.get(i).size() != 0){
+                outputEdges = outputEdges.substring(0, outputEdges.length() - 2) + "] \n";
+            }else{
+                outputEdges = "[] \n";
+            }
         }
         outputEdges += "\n";
 
