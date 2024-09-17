@@ -123,7 +123,7 @@ public class DirectionalAdjacencyMatrix{
         for(int i = 0; i < nodeAmount; i++){
             output += ((i > -1 && i < 9) ? "  " + (i + 1) : " " + (i + 1)) + " |";
             for(int j = 0; j < nodeAmount; j++){
-                output += (this.matrix.get(i).get(j) < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j) + " |";
+                output += ((this.matrix.get(i).get(j) < 9) ? "  " + this.matrix.get(i).get(j) : " " + this.matrix.get(i).get(j)) + " |";
             }
             output += "\n";
         }

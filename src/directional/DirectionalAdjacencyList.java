@@ -121,7 +121,7 @@ public class DirectionalAdjacencyList{
             if(this.nodeList.get(i).size() != 0){
                 outputNodes = outputNodes.substring(0, outputNodes.length() - 2) + "] \n";
             }else{
-                outputNodes = "[] \n";
+                outputNodes += "] \n";
             }
         }
         outputNodes += "\n";
@@ -135,12 +135,12 @@ public class DirectionalAdjacencyList{
             if(this.edgeList.get(i).size() != 0){
                 outputEdges = outputEdges.substring(0, outputEdges.length() - 2) + "] \n";
             }else{
-                outputEdges = "[] \n";
+                outputEdges += "] \n";
             }
         }
         outputEdges += "\n";
 
-        return "Lista de Adjacência Direcionada \n" + outputNodes + outputEdges + this.loopDetection() + this.parallelEdgeDetection() + this.allNodesDegree();
+        return "Lista de Adjacência Direcionada: \n" + outputNodes + outputEdges + this.loopDetection() + this.parallelEdgeDetection() + this.allNodesDegree();
     }
 
 }

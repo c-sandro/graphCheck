@@ -274,7 +274,7 @@ public class Main{
                 {
                     int newQnt;
                     while(true){
-                        System.out.println("Digite a quandidade de vértices: ");
+                        System.out.println("Digite a quantidade de vértices: ");
                         try{
                             newQnt = Integer.parseInt(scan.nextLine());
                             if(newQnt < 1){
